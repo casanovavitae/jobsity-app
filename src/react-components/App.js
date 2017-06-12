@@ -1,18 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Auth0Lock from 'auth0-lock';
-import './App.css';
-import { createStore } from 'redux'
 import {Grid, Row, Col} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './react-components/home/Home';
-import Dashboard from './react-components/home/Dashboard';
-import Header from './react-components/global/Header';
-import Counter from './react-components/counter/Counter';
-import counter from './reducers/Counter'
+import Home from './home/Home';
+import Dashboard from './home/Dashboard';
+import Header from './global/Header';
+import Counter from './counter/Counter';
 
-const store = createStore(counter);
 
-class App extends Component {
+class App extends React.Component {
     constructor(props) {
         super(props);
         this.state ={
@@ -21,6 +17,12 @@ class App extends Component {
         }
         this.showLock   = this.showLock.bind(this);
         this.logout     = this.logout.bind(this);
+    }
+
+    componentDidMount() {
+      /*store.subscribe(() => {
+          console.log(store.getState());
+      })*/
     }
 
     componentWillMount(){
@@ -74,15 +76,13 @@ class App extends Component {
         })
     }
 
+
     render() {
+
         let page;
         if(this.state.idToken){
             page = <div><Dashboard lock={this.lock} idToken={this.state.idToken} profile={this.state.profile}/>
-                <Counter
-                value={store.getState()}
-                onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
-                onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
-                />
+                <Counter/>
             </div>
         }else {
             page = <Home/>
@@ -108,9 +108,15 @@ class App extends Component {
     }
 }
 
+//let unsubscribe = store.subscribe(handleChange);
+//c(Counter);
+
+
 App.defaultProps = {
     clientId: 'Y43zKBItUMFQkfsMnLR4KIfbVIqY37Xm',
     domain: 'casanova-vitae.auth0.com'
 };
 
+//export default App;
 export default App;
+

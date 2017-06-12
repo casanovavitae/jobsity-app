@@ -1,47 +1,41 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {increment} from '../../actions/counter/action-counter';
+import {decrement} from '../../actions/counter/action-counter';
+//import PropTypes from 'prop-types';
 
-class Counter extends Component {
-    static propTypes = {
+class Counter extends React.Component {
+    /*static propTypes = {
         value: PropTypes.number.isRequired,
         onIncrement: PropTypes.func.isRequired,
         onDecrement: PropTypes.func.isRequired
-    }
-
-    incrementIfOdd = () => {
-        if (this.props.value % 2 !== 0) {
-            this.props.onIncrement()
-        }
-    }
-
-    incrementAsync = () => {
-        setTimeout(this.props.onIncrement, 1000)
-    }
+    }*/
 
     render() {
-        const { value, onIncrement, onDecrement } = this.props
         return (
             <p>
-                Clicked: {value} times
+                Clicked: {this.props.counter} times
                 {' '}
-                <button onClick={onIncrement}>
+                <button onClick={() => this.props.actionIncrement(this.props.counter)}>
                     +
                 </button>
                 {' '}
-                <button onClick={onDecrement}>
+                <button onClick={() => this.props.actionDecrement(this.props.counter)}>
                     -
-                </button>
-                {' '}
-                <button onClick={this.incrementIfOdd}>
-                    Increment if odd
-                </button>
-                {' '}
-                <button onClick={this.incrementAsync}>
-                    Increment async
                 </button>
             </p>
         )
     }
 }
 
-export default Counter
+function mapStateToProps(state) {
+    return{
+        counter: state.counter
+    }
+}
+
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({actionIncrement: increment,actionDecrement:decrement},dispatch)
+}
+export default connect(mapStateToProps,matchDispatchToProps)(Counter)
