@@ -3,6 +3,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {increment} from '../../actions/counter/action-counter';
 import {decrement} from '../../actions/counter/action-counter';
+import {apicall} from '../../actions/action-api';
 //import PropTypes from 'prop-types';
 
 class Counter extends React.Component {
@@ -24,6 +25,9 @@ class Counter extends React.Component {
                 <button onClick={() => this.props.actionDecrement(this.props.counter)}>
                     -
                 </button>
+                <button onClick={() => this.props.api(null)}>
+                    X
+                </button>
             </p>
         )
     }
@@ -36,6 +40,6 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({actionIncrement: increment,actionDecrement:decrement},dispatch)
+    return bindActionCreators({actionIncrement: increment,actionDecrement:decrement,api:apicall},dispatch)
 }
 export default connect(mapStateToProps,matchDispatchToProps)(Counter)
