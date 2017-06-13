@@ -1,8 +1,7 @@
 import React from 'react'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {increment} from '../../actions/counter/action-counter';
-import {decrement} from '../../actions/counter/action-counter';
+import {increment,decrement} from '../../actions/action-counter';
 import {apicall} from '../../actions/action-api';
 //import PropTypes from 'prop-types';
 

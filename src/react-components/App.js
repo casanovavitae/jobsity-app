@@ -6,23 +6,16 @@ import Home from './home/Home';
 import Dashboard from './home/Dashboard';
 import Header from './global/Header';
 import Counter from './counter/Counter';
+import {logIn,logOut} from '../actions/action-auth'
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
 
 class App extends React.Component {
     constructor(props) {
-        super(props);
-        this.state ={
-            idToken:'',
-            profile:{}
-        }
+        super(props)
         this.showLock   = this.showLock.bind(this);
         this.logout     = this.logout.bind(this);
-    }
-
-    componentDidMount() {
-      /*store.subscribe(() => {
-          console.log(store.getState());
-      })*/
     }
 
     componentWillMount(){
@@ -38,28 +31,19 @@ class App extends React.Component {
             });
 
         });
-
-        this.getData();
     }
 
     setData(idToken,profile){
         localStorage.setItem('idToken',idToken);
         localStorage.setItem('profile',JSON.stringify(profile));
-        this.setState({
+
+        let auth = {
             idToken: localStorage.getItem('idToken'),
             profile: JSON.parse(localStorage.getItem('profile'))
-        });
-    }
-
-    getData(){
-        if(localStorage.getItem('idToken') != null){
-            this.setState({
-                idToken: localStorage.getItem('idToken'),
-                profile: JSON.parse(localStorage.getItem('profile'))
-            },()=>{
-                console.log(this.state);
-            });
         }
+
+        this.props.logIn(auth);
+
     }
 
     showLock(){
@@ -67,22 +51,19 @@ class App extends React.Component {
     }
 
     logout(){
-        this.setState({
+        let auth = {
             idToken:'',
-            profile:''
-        },()=>{
-            localStorage.removeItem('idToken');
-            localStorage.removeItem('profile');
-        })
-    }
+            profile: ''
+        }
 
+        this.props.logOut(auth);
+    }
 
     render() {
 
         let page;
-        if(this.state.idToken){
-            page = <div><Dashboard lock={this.lock} idToken={this.state.idToken} profile={this.state.profile}/>
-                <Counter/>
+        if(this.props.auth.idToken){
+            page = <div><Dashboard lock={this.lock} idToken={this.props.auth.idToken} profile={this.props.auth.profile}/>
             </div>
         }else {
             page = <Home/>
@@ -93,8 +74,8 @@ class App extends React.Component {
                     onLogoutClick={this.logout}
                     onLoginClick={this.showLock}
                     lock={this.lock}
-                    idToken={this.state.idToken}
-                    profile={this.state.profile}
+                    idToken={this.props.auth.idToken}
+                    profile={this.props.auth.profile}
                 />
                 <Grid>
                     <Row>
@@ -108,15 +89,18 @@ class App extends React.Component {
     }
 }
 
-//let unsubscribe = store.subscribe(handleChange);
-//c(Counter);
-
-
 App.defaultProps = {
     clientId: 'Y43zKBItUMFQkfsMnLR4KIfbVIqY37Xm',
     domain: 'casanova-vitae.auth0.com'
 };
 
-//export default App;
-export default App;
+function mapStateToProps(state) {
+    return{
+        auth: state.auth
+    }
+}
 
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({logIn: logIn,logOut:logOut},dispatch)
+}
+export default connect(mapStateToProps,matchDispatchToProps)(App)

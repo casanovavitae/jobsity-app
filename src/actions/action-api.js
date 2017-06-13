@@ -18,17 +18,4 @@ export const apicall = (data) => {
   }
 }
 
-/*export const apicall = (data) => {
-    return dispatch => {
-        axios.get(API_URL)
-            .then(response => {
-                return{
-                    type: "API_GET",
-                    payload: response.data.text
-                }
 
-            });
-
-    }
-}
-*/
