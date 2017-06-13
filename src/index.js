@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import allReducers from './reducers/reducer-app'
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
-import Root from './react-components/routers/Router'
+import Root from './react-components/App'
 
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);

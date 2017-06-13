@@ -1,106 +1,60 @@
 import React from 'react';
-import Auth0Lock from 'auth0-lock';
-import {Grid, Row, Col} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Home from './home/Home';
-import Dashboard from './home/Dashboard';
-import Header from './global/Header';
-import Counter from './counter/Counter';
-import {logIn,logOut} from '../actions/action-auth'
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {BrowserRouter as Router, Route, Link, Switch, Redirect} from 'react-router-dom'
+import {Jumbotron} from 'react-bootstrap';
+import {Provider} from 'react-redux';
+import HeaderMain from './global/HeaderMain'
+import Counter from './counter/Counter'
+import Home from './home/Home'
 
+const Err = () => (
+    <Jumbotron>
+        <h1>404 Page not Found</h1>
+        <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    </Jumbotron>
+)
 
-class App extends React.Component {
-    constructor(props) {
-        super(props)
-        this.showLock   = this.showLock.bind(this);
-        this.logout     = this.logout.bind(this);
-    }
+const Links = () => (
+    <nav>
+        <Link to="/">Home</Link>
+        <Link to="/protected">protected</Link>
+    </nav>
+)
 
-    componentWillMount(){
-        this.lock = new Auth0Lock(this.props.clientId,this.props.domain);
-        this.lock.on('authenticated',(authResult) => {
-            this.lock.getProfile(authResult.idToken,(error,profile)=>{
-                if(error){
-                    console.log(error);
-                    return;
-                }
-
-                this.setData(authResult.idToken,profile);
-            });
-
-        });
-    }
-
-    setData(idToken,profile){
-        localStorage.setItem('idToken',idToken);
-        localStorage.setItem('profile',JSON.stringify(profile));
-
-        let auth = {
-            idToken: localStorage.getItem('idToken'),
-            profile: JSON.parse(localStorage.getItem('profile'))
-        }
-
-        this.props.logIn(auth);
-
-    }
-
-    showLock(){
-        this.lock.show();
-    }
-
-    logout(){
-        let auth = {
-            idToken:'',
-            profile: ''
-        }
-
-        this.props.logOut(auth);
-    }
-
-    render() {
-
-        let page;
-        if(this.props.auth.idToken){
-            page = <div><Dashboard lock={this.lock} idToken={this.props.auth.idToken} profile={this.props.auth.profile}/>
+const Protected = () => <h3>Protected</h3>
+//<Route exact path="/" component={App} />
+const App = ({ store }) => (
+    <Provider store={store}>
+        <Router>
+            <div>
+                <Links/>
+                <HeaderMain/>
+                <Switch>
+                    <Route exact path="/" component={Home} />
+                    <Route path="/" component={Counter} />
+                    <PrivateRoute path="/protected" component={Protected}/>
+                    <Route component={Err} />
+                </Switch>
             </div>
-        }else {
-            page = <Home/>
-        }
-        return (
-            <div className="App">
-                <Header
-                    onLogoutClick={this.logout}
-                    onLoginClick={this.showLock}
-                    lock={this.lock}
-                    idToken={this.props.auth.idToken}
-                    profile={this.props.auth.profile}
-                />
-                <Grid>
-                    <Row>
-                        <Col xs={12} md={12}>
-                            {page}
-                        </Col>
-                    </Row>
-                </Grid>
-            </div>
-        );
-    }
-}
+        </Router>
+    </Provider>
+);
 
-App.defaultProps = {
-    clientId: 'Y43zKBItUMFQkfsMnLR4KIfbVIqY37Xm',
-    domain: 'casanova-vitae.auth0.com'
+const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={props => (
+        false ? (
+                <Component {...props}/>
+            ) : (
+                <Redirect to={{
+                    pathname: '/',
+                    state: { from: props.location }
+                }}/>
+            )
+    )}/>
+)
+
+App.propTypes = {
+    store: PropTypes.object.isRequired,
 };
 
-function mapStateToProps(state) {
-    return{
-        auth: state.auth
-    }
-}
-
-function matchDispatchToProps(dispatch) {
-    return bindActionCreators({logIn: logIn,logOut:logOut},dispatch)
-}
-export default connect(mapStateToProps,matchDispatchToProps)(App)
+export default App;
