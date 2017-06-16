@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {connect} from 'react-redux';
 import {Grid, Row, Col} from 'react-bootstrap';
-class Dashboard extends Component {
+class Dashboard extends React.Component {
 
     render() {
         return (
@@ -24,4 +25,14 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard;
+function mapStateToProps(state) {
+
+    console.log('Dashboard');
+
+    return{
+        idToken: state.auth.idToken,
+        profile: state.auth.profile
+    }
+}
+
+export default connect(mapStateToProps)(Dashboard)

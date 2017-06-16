@@ -1,11 +1,19 @@
-import React from 'react';
+/*import React from 'react';
+import {Grid, Row, Col} from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import {BrowserRouter as Router, Route, Link, Switch, Redirect} from 'react-router-dom'
+import {connect} from 'react-redux';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import {Jumbotron} from 'react-bootstrap';
 import {Provider} from 'react-redux';
 import HeaderMain from './global/HeaderMain'
+import Login from './home/Login';
 import Counter from './counter/Counter'
-import Home from './home/Home'
+import Dashboard from './home/Dashboard'
+import Portafolio from './portafolio/Portafolio'
+
+
+
+
 
 const Err = () => (
     <Jumbotron>
@@ -14,47 +22,52 @@ const Err = () => (
     </Jumbotron>
 )
 
-const Links = () => (
-    <nav>
-        <Link to="/">Home</Link>
-        <Link to="/protected">protected</Link>
-    </nav>
-)
+class App extends React.Component {
 
-const Protected = () => <h3>Protected</h3>
-//<Route exact path="/" component={App} />
-const App = ({ store }) => (
-    <Provider store={store}>
-        <Router>
-            <div>
-                <Links/>
-                <HeaderMain/>
+    render() {
+        let page;
+        if(localStorage.getItem('idToken') != null){
+            page =
                 <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route path="/" component={Counter} />
-                    <PrivateRoute path="/protected" component={Protected}/>
+                    <Route exact path="/" component={Dashboard} />
+                    <Route path="/portafolio" component={Portafolio} />
+                    <Route path="/counter" component={Counter} />
                     <Route component={Err} />
                 </Switch>
-            </div>
-        </Router>
-    </Provider>
-);
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={props => (
-        false ? (
-                <Component {...props}/>
-            ) : (
-                <Redirect to={{
-                    pathname: '/',
-                    state: { from: props.location }
-                }}/>
-            )
-    )}/>
-)
+        } else {
+            page = <Login />
+        }
+        return (
+            <Provider store={this.props.store}>
+                <Router>
+                    <div>
+                        <Grid>
+                            <Row>
+                                <Col xs={3} md={3}>
+                                    <HeaderMain/>
+                                </Col>
+                                <Col xs={9} md={9}>
+                                    {page}
+                                </Col>
+                            </Row>
+                        </Grid>
+                    </div>
+                </Router>
+            </Provider>
+        )
+    }
+}
 
 App.propTypes = {
-    store: PropTypes.object.isRequired,
+    store: PropTypes.object.isRequired
 };
 
-export default App;
+function mapStateToProps(state) {
+
+    return{
+        idToken: state.auth.idToken,
+        profile: state.auth.profile
+    }
+}
+
+export default connect(mapStateToProps)(App)*/

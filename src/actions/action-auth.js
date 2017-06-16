@@ -1,4 +1,5 @@
 export const logIn = (data) => {
+    console.log(data);
     return{
         type: "AUTH_LOGIN",
         payload: data

@@ -1,13 +1,36 @@
 import {combineReducers} from 'redux';
-import counter from './reducer-counter'
-import api from './reducer-api';
-import auth from './reducer-auth'
+import counter from './reducer-counter';
+import {get_resume} from './reducer-api';
+import auth from './reducer-auth';
+import { routerReducer } from 'react-router-redux';
 
-const allReducers = combineReducers({
+
+
+
+
+/*const allReducers = combineReducers({
+    routing: routerReducer,
     credential: null,
     counter: counter,
-    response: api,
+    api: a(),
+    apib: b(),
     auth: auth
-})
+})*/
+const allReducers = combineReducers(
+    {
+        routing: routerReducer,
+        credential: null,
+        counter: counter,
+        api: get_resume,
+        auth: auth
+    }
+    )
 
 export default  allReducers;
+
+/*
+ api_response:
+ {
+ api_get_resume: api.type == 'API_GET_RESUME'?api:'',
+ api_get_text:   api.type == 'API_GET_TEXT'?api:''
+ },*/

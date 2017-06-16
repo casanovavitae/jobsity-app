@@ -1,41 +1,70 @@
-import React, { Component } from 'react';
-import {Navbar, Nav, NavItem} from 'react-bootstrap';
+import React, { Component } from 'react'
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {retrieveData} from '../../actions/action-api'
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-        this.onLoginClick = this.onLoginClick.bind(this);
-        this.onLogoutClick = this.onLogoutClick.bind(this);
+class Header extends Component {
+    componentWillMount(){
+        this.props.apiGetData(null);
+        //console.log('WMount',this.props);
     }
-
-    onLoginClick(){
-        this.props.onLoginClick();
-    }
-
-    onLogoutClick(){
-        this.props.onLogoutClick();
-    }
-
     render() {
-        let navItems;
-        if(this.props.idToken){
-            navItems = <NavItem onClick={this.onLogoutClick.bind(this)} href="#">Logout</NavItem>
-        } else {
-            navItems = <NavItem onClick={this.onLoginClick.bind(this)} href="#">Login</NavItem>
+        if(this.props.header.api){
+
+            let obj = this.props.header.api.data.main;
+
+            var name = obj.name;
+            var occupation = obj.occupation;
+            var description = obj.description;
+            var city = obj.city;
+            var networks = obj.social.map(function(network){
+                return <li key={network.name}><a href={network.url}><i className={network.className}></i></a></li>
+            });
         }
         return (
-            <Navbar>
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        ReactAuth App
-                    </Navbar.Brand>
-                </Navbar.Header>
-                <Nav>
-                    {navItems}
-                </Nav>
-            </Navbar>
+            <header id="home">
+                <nav id="nav-wrap">
+                    <a className="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
+                    <a className="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
+                    <ul id="nav" className="nav">
+                        <li className="current"><a className="smoothscroll" href="#home">Home</a></li>
+                        <li><a className="smoothscroll" href="/about">About</a></li>
+                        <li><a className="smoothscroll" href="/resume">Resume</a></li>
+                        <li><a className="smoothscroll" href="/portfolio">Works</a></li>
+                        <li><a className="smoothscroll" href="/testimonials">Testimonials</a></li>
+                        <li><a className="smoothscroll" href="/contact">Contact</a></li>
+                    </ul>
+
+                </nav>
+
+                <div className="row banner">
+                    <div className="banner-text">
+                        <h1 className="responsive-headline">Im {name}.</h1>
+                        <h3>Im a {city} based <span>{occupation}</span> {description}</h3>
+                        <hr />
+                        <ul className="social">
+                            {networks}
+                        </ul>
+                    </div>
+                </div>
+                <p className="scrolldown">
+                    <a className="smoothscroll" href="#about"><i className="icon-down-circle"></i></a>
+                </p>
+
+            </header>
         );
     }
 }
 
-export default App;
+
+function mapStateToProps(state) {
+        return{
+            header: state
+        }
+}
+
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({apiGetData: retrieveData},dispatch)
+}
+export default connect(mapStateToProps,matchDispatchToProps)(Header)
+

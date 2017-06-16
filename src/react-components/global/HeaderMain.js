@@ -27,6 +27,8 @@ class HeaderMain extends React.Component {
             });
 
         });
+
+        this.getData();
     }
 
     setData(idToken,profile){
@@ -53,6 +55,17 @@ class HeaderMain extends React.Component {
         }
 
         this.props.logOut(auth);
+    }
+
+    getData(){
+        if(localStorage.getItem('idToken') != null){
+            let auth = {
+                idToken: localStorage.getItem('idToken'),
+                profile: JSON.parse(localStorage.getItem('profile'))
+            }
+
+            this.props.logIn(auth);
+        }
     }
 
     render() {
