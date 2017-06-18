@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 class Portfolio extends Component {
   render() {
-    if(this.props.data){
-      var portfolio = this.props.data.projects.map(function(project){
-        var imageUrl = 'images/portfolio/'+project.image;
-        return <div className="columns portfolio-item">
+      //var imageUrl = '../../images/portfolio/'+project.image;
+      //
+    if(this.props.portfolio){
+      var portfolio = this.props.portfolio.projects.map(function(project,index){
+      var imageUrl = 'https://www.staples-3p.com/s7/is/image/Staples/s0076752_sc7?$splssku$';
+        return <div key={index} className="columns portfolio-item">
            <div className="item-wrap">
               <a href={project.modal} title="">
                  <img alt="" src={imageUrl} />
@@ -37,4 +40,10 @@ class Portfolio extends Component {
   }
 }
 
-export default Portfolio;
+function mapStateToProps(state) {
+    return{
+        portfolio: state.api.data.portfolio
+    }
+}
+
+export default connect(mapStateToProps)(Portfolio)

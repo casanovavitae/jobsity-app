@@ -5,9 +5,17 @@ import { Provider } from 'react-redux'
 import { Redirect, Route, Switch} from 'react-router'
 import { HashRouter, Link } from 'react-router-dom'
 import Header from './global/Header'
-import Login from './home/Login'
 import Counter from './counter/Counter'
-import Portafolio from './portafolio/Portafolio'
+/*PORTAFOLIO*/
+import Home from './portafolio/Home'
+import Resume from './portafolio/Resume'
+import Portfolio from './portafolio/Portfolio'
+import Testimonials from './portafolio/Testimonials'
+import Footer from './portafolio/Footer'
+import Contact from './portafolio/Contact'
+import About from './portafolio/About'
+/***********/
+
 
 const Err = () => (
     <div>
@@ -23,11 +31,11 @@ const Links = () => (
             <a className="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
                 <ul id="nav" className="nav">
                     <li className="current"><Link to="/">Home</Link></li>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/Resume">Resume</Link></li>
+                    <li><Link to="/Portfolio">Portfolio</Link></li>
+                    <li><Link to="/Testimonials">Testimonials</Link></li>
+                    <li><Link to="/Contact">Contact</Link></li>
+                    <li><Link to="/About">About</Link></li>
                 </ul>
         </nav>
     </header>
@@ -40,11 +48,16 @@ const Root = ({ store }) => (
             <div>
                 <Links/>
                 <Switch>
-                    <Route exact path="/" component={Login} />
-                    <Route path="/counter" component={Counter} />
-                    <Route path="/portafolio" component={Portafolio} />
+                    <Route exact path="/" component={Home} />
+                    <Route path="/Resume" component={Resume} />
+                    <Route exact path="/Portfolio" component={Portfolio} />
+                        <Route path='/Portfolio/modal-01' component={Counter}/>
+                    <Route path="/Testimonials" component={Testimonials} />
+                    <Route path="/Contact" component={Contact} />
+                    <Route path="/About" component={About} />
                     <Route component={Err} />
                 </Switch>
+                <Footer/>
             </div>
         </HashRouter>
     </Provider>
@@ -71,7 +84,7 @@ function mapStateToProps(state) {
     console.log(state);
     return{
         idToken: state.auth.idToken,
-        profile: state.auth.profile
+        profile: state.auth.profile,
     }
 }
 

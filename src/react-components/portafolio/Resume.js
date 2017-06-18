@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 class Resume extends Component {
   render() {
-    if(this.props.data){
-      var education = this.props.data.education.map(function(edu){
+    if(this.props.resume){
+      var education = this.props.resume.education.map(function(edu){
         return <div key={edu.school} className="row item">
            <div className="twelve columns">
               <h3>{edu.school}</h3>
@@ -15,7 +16,7 @@ class Resume extends Component {
         </div>
       });
 
-      var work = this.props.data.work.map(function(job){
+      var work = this.props.resume.work.map(function(job){
         return <div key={job.company} className="row item">
            <div className="twelve columns">
               <h3>{job.company}</h3>
@@ -28,7 +29,7 @@ class Resume extends Component {
         </div>
       });
 
-      var skills = this.props.data.skills.map(function(skill){
+      var skills = this.props.resume.skills.map(function(skill){
         var className = 'bar-expand '+skill.name.toLowerCase();
         return <li key={skill.name}><span style={{width:skill.level}} className={className}></span><em>{skill.name}</em></li>
       });
@@ -77,4 +78,12 @@ class Resume extends Component {
   }
 }
 
-export default Resume;
+function mapStateToProps(state) {
+    console.log(state);
+    return{
+        resume: state.api.data.resume
+    }
+}
+
+export default connect(mapStateToProps)(Resume)
+

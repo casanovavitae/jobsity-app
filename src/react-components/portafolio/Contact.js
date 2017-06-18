@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 class Contact extends Component {
   render() {
-    if(this.props.data){
-      var name = this.props.data.name;
-      var street = this.props.data.address.street;
-      var city = this.props.data.address.city;
-      var state = this.props.data.address.state;
-      var zip = this.props.data.address.zip;
-      var phone = this.props.data.phone;
+    if(this.props.contact){
+      var name = this.props.contact.name;
+      var street = this.props.contact.address.street;
+      var city = this.props.contact.address.city;
+      var state = this.props.contact.address.state;
+      var zip = this.props.contact.address.zip;
+      var phone = this.props.contact.phone;
       //var email = this.props.data.email;
     }
     return (
@@ -94,4 +95,10 @@ class Contact extends Component {
   }
 }
 
-export default Contact;
+function mapStateToProps(state) {
+    return{
+        contact: state.api.data.main
+    }
+}
+
+export default connect(mapStateToProps)(Contact);

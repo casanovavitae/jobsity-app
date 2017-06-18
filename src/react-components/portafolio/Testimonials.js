@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 class Testimonials extends Component {
   render() {
-    if(this.props.data){
-      var testimonials = this.props.data.testimonials.map(function(testimonial){
+    if(this.props.testimonials){
+      var testimonials = this.props.testimonials.testimonials.map(function(testimonial){
         return <li>
            <blockquote>
               <p>{testimonial.text}
@@ -32,4 +33,12 @@ class Testimonials extends Component {
   }
 }
 
-export default Testimonials;
+function mapStateToProps(state) {
+    console.log(state.api.data.testimonials);
+    return{
+        testimonials: state.api.data.testimonials
+    }
+}
+
+export default connect(mapStateToProps)(Testimonials)
+

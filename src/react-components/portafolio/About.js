@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 class About extends Component {
   render() {
-    if(this.props.data){
-        var name = this.props.data.name;
-        var image = 'images/'+this.props.data.image;
-        var bio = this.props.data.bio;
-        var street = this.props.data.address.street;
-        var city = this.props.data.address.city;
-        var state = this.props.data.address.state;
-        var zip = this.props.data.address.zip;
-        var phone = this.props.data.phone;
-        var email = this.props.data.email;
-        var resumeDownload = this.props.data.resumedownload;
+    if(this.props.about){
+        var name = this.props.about.name;
+        var image = 'images/'+this.props.about.image;
+        var bio = this.props.about.bio;
+        var street = this.props.about.address.street;
+        var city = this.props.about.address.city;
+        var state = this.props.about.address.state;
+        var zip = this.props.about.address.zip;
+        var phone = this.props.about.phone;
+        var email = this.props.about.email;
+        var resumeDownload = this.props.about.resumedownload;
     }
     return (
       <section id="about">
@@ -49,4 +50,10 @@ class About extends Component {
   }
 }
 
-export default About;
+function mapStateToProps(state) {
+    return{
+        about: state.api.data.main
+    }
+}
+
+export default connect(mapStateToProps)(About);
