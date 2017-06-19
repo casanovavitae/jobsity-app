@@ -176,10 +176,8 @@ ul#nav li a {
 	-ms-transition: color .2s ease-in-out;
 	transition: color .2s ease-in-out;
 }
-
+ul#nav li a.current{color: #F06000;}
 ul#nav li a:active { background-color: transparent !important; }
-ul#nav li.current a { color: #F06000; }
-
 
 /* ------------------------------------------------------------------ */
 /* c. About Section

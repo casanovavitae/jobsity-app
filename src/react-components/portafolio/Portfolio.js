@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import { Redirect, Route, Switch,Router} from 'react-router'
+import { Link,HashRouter } from 'react-router-dom'
+import Counter from '../counter/Counter'
+import Manager from '../manager/Manager'
 
 class Portfolio extends Component {
   render() {
@@ -10,16 +14,15 @@ class Portfolio extends Component {
       var imageUrl = 'https://www.staples-3p.com/s7/is/image/Staples/s0076752_sc7?$splssku$';
         return <div key={index} className="columns portfolio-item">
            <div className="item-wrap">
-              <a href={project.modal} title="">
+               <Link to={"/Portfolio/"+project.url}>
                  <img alt="" src={imageUrl} />
                  <div className="overlay">
                     <div className="portfolio-item-meta">
-                   <h5>{project.title}</h5>
-                       <p>{project.category}</p>
-                </div>
+                        <h5>{project.title}</h5>
+                        <p>{project.category}</p>
+                    </div>
                  </div>
-                 
-              </a>
+              </Link>
 
            </div>
        </div>
@@ -33,6 +36,12 @@ class Portfolio extends Component {
             <div id="portfolio-wrapper" className="bgrid-quarters s-bgrid-thirds cf">
           	   {portfolio}
             </div>
+             <HashRouter>
+                 <div>
+                     <Route path='/Portfolio/Counter' component={Counter}/>
+                     <Route path='/Portfolio/Manager' component={Manager}/>
+                 </div>
+             </HashRouter>
          </div>
       </div>
    </section>

@@ -112,21 +112,21 @@
   "portfolio":{
     "projects": [
       {
-        "title":"Coffee Cup",
-        "description":"Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.",
-        "category":"Illustrator",
-        "tags":"Branding, Web Design",
+        "title":"Counter manager",
+        "description":"Increment or Decrement a value using redux Architecture",
+        "category":"Web Develop",
+        "tags":"React, Redux",
         "image":"coffee.jpg",
-        "url":"http://port1.com",
+        "url":"Counter",
         "modal":"#modal-01"
       },
       {
-        "title":"Console",
-        "description":"Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.",
-        "category":"Web Design",
-        "tags":"Branding, Web Development",
+        "title":"Task Manager",
+        "description":"Improve your team productivity trackin task",
+        "category":"Web Develop",
+        "tags":"React, Redux, MongoDb, MongoLab",
         "image":"console.jpg",
-        "url":"http://port2.com",
+        "url":"Manager",
         "modal":"#modal-02"
       },
       {
@@ -135,7 +135,7 @@
         "category":"Web Development",
         "tags":"Branding, Web Programming",
         "image":"judah.jpg",
-        "url":"http://port3.com",
+        "url":"Calculator",
         "modal":"#modal-03"
       },
       {
@@ -144,7 +144,7 @@
         "category":"Photography",
         "tags":"Photography, Design",
         "image":"into-the-light.jpg",
-        "url":"http://port4.com",
+        "url":"Text",
         "modal":"#modal-04"
       },
       {
@@ -153,7 +153,7 @@
         "category":"Branding",
         "tags":"Branding, Web Design",
         "image":"farmerboy.jpg",
-        "url":"http://port5.com",
+        "url":"Chart",
         "modal":"#modal-05"
       },
       {
@@ -162,7 +162,7 @@
         "category":"Photography",
         "tags":"Photography, Graphic Design",
         "image":"girl.jpg",
-        "url":"http://port6.com",
+        "url":"Mongo",
         "modal":"#modal-06"
       },
       {
@@ -171,7 +171,7 @@
         "category":"Illustration",
         "tags":"Branding, Illustration",
         "image":"origami.jpg",
-        "url":"http://port7.com",
+        "url":"Finder",
         "modal":"#modal-07"
       },
       {
@@ -180,7 +180,7 @@
         "category":"Web Development",
         "tags":"Photography",
         "image":"retrocam.jpg",
-        "url":"http://port8.com",
+        "url":"Tictactoe",
         "modal":"#modal-08"
       }
     ]

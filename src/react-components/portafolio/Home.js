@@ -6,7 +6,7 @@ import {retrieveData} from '../../actions/action-api'
 class Header extends Component {
 
     componentWillMount(){
-        this.props.apiGetData(null);
+        this.props.apiGetData("API_GET_RESUME","http://localhost:3000/resumeData.json");
     }
 
     render() {

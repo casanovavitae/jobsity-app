@@ -1,19 +1,3 @@
-/*export default function (state="", action){
-    console.log("REDUCERRRR");
-    console.log('Action',action);
-    switch (action.type) {
-        case "API_GET_TEXT":
-            return {data: action.payload,type: 'API_GET_TEXT'}
-        case "API_GET_RESUME":
-            console.log("get resume");
-            return {data: action.payload,type: 'API_GET_RESUME'}
-        default:
-            return state
-    }
-}*/
-
-
-
 export function get_resume(state="", action){
     switch (action.type) {
         case "API_GET_RESUME":
@@ -24,35 +8,22 @@ export function get_resume(state="", action){
     }
 }
 
-
-/*function todoApp(state = initialState, action) {
+export function get_tasks(state="", action){
     switch (action.type) {
-        case SET_VISIBILITY_FILTER:
-            return Object.assign({}, state, {
-                visibilityFilter: action.filter
-            })
-        case ADD_TODO:
-            return Object.assign({}, state, {
-                todos: [
-                    ...state.todos,
-                    {
-                        text: action.text,
-                        completed: false
-                    }
-                ]
-            })
-        case TOGGLE_TODO:
-            return Object.assign({}, state, {
-                todos: state.todos.map((todo, index) => {
-                    if (index === action.index) {
-                        return Object.assign({}, todo, {
-                            completed: !todo.completed
-                        })
-                    }
-                    return todo
-                })
-            })
+        case "API_GET_TASKS":
+            console.log("get tasks");
+            return {data: action.payload,type: 'API_GET_RESUME'}
         default:
             return state
     }
-}*/
+}
+
+export function put_task(state="", action){
+    switch (action.type) {
+        case "API_PUT_TASKS":
+            console.log("put tasks");
+            return {data: action.payload,type: 'API_PUT_TASKS'}
+        default:
+            return state
+    }
+}

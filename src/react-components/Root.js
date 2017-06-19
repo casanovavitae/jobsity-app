@@ -3,9 +3,8 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 import { Redirect, Route, Switch} from 'react-router'
-import { HashRouter, Link } from 'react-router-dom'
+import { HashRouter, NavLink } from 'react-router-dom'
 import Header from './global/Header'
-import Counter from './counter/Counter'
 /*PORTAFOLIO*/
 import Home from './portafolio/Home'
 import Resume from './portafolio/Resume'
@@ -30,12 +29,12 @@ const Links = () => (
             <a className="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
             <a className="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
                 <ul id="nav" className="nav">
-                    <li className="current"><Link to="/">Home</Link></li>
-                    <li><Link to="/Resume">Resume</Link></li>
-                    <li><Link to="/Portfolio">Portfolio</Link></li>
-                    <li><Link to="/Testimonials">Testimonials</Link></li>
-                    <li><Link to="/Contact">Contact</Link></li>
-                    <li><Link to="/About">About</Link></li>
+                    <li><NavLink exact activeClassName="current" to="/">Home</NavLink></li>
+                    <li><NavLink activeClassName="current" to="/Resume">Resume</NavLink></li>
+                    <li><NavLink activeClassName="current" to="/Portfolio">Portfolio</NavLink></li>
+                    <li><NavLink activeClassName="current" to="/Testimonials">Testimonials</NavLink></li>
+                    <li><NavLink activeClassName="current" to="/Contact">Contact</NavLink></li>
+                    <li><NavLink activeClassName="current" to="/About">About</NavLink></li>
                 </ul>
         </nav>
     </header>
@@ -50,8 +49,7 @@ const Root = ({ store }) => (
                 <Switch>
                     <Route exact path="/" component={Home} />
                     <Route path="/Resume" component={Resume} />
-                    <Route exact path="/Portfolio" component={Portfolio} />
-                        <Route path='/Portfolio/modal-01' component={Counter}/>
+                    <Route path="/Portfolio" component={Portfolio} />
                     <Route path="/Testimonials" component={Testimonials} />
                     <Route path="/Contact" component={Contact} />
                     <Route path="/About" component={About} />
