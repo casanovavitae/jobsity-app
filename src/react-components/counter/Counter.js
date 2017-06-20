@@ -33,7 +33,6 @@ class Counter extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log("counter",state);
     return{
         counter: state.counter
     }

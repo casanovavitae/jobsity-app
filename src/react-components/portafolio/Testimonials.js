@@ -34,7 +34,6 @@ class Testimonials extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state.api.data.testimonials);
     return{
         testimonials: state.api.data.testimonials
     }

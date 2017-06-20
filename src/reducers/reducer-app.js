@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import counter from './reducer-counter';
-import {get_resume,get_tasks,put_task} from './reducer-api';
+import {get_resume,get_tasks} from './reducer-api';
 import auth from './reducer-auth';
 import { routerReducer } from 'react-router-redux';
 
@@ -23,7 +23,6 @@ const allReducers = combineReducers(
         counter: counter,
         api: get_resume,
         task: get_tasks,
-        puttask: put_task,
         auth: auth
     }
     )

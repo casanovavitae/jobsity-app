@@ -6,7 +6,6 @@ import {retrieveData} from '../../actions/action-api'
 class Header extends Component {
     componentWillMount(){
         this.props.apiGetData(null);
-        //console.log('WMount',this.props);
     }
     render() {
         if(this.props.header.api){

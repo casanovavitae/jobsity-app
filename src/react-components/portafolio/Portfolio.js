@@ -11,7 +11,7 @@ class Portfolio extends Component {
       //
     if(this.props.portfolio){
       var portfolio = this.props.portfolio.projects.map(function(project,index){
-      var imageUrl = 'https://www.staples-3p.com/s7/is/image/Staples/s0076752_sc7?$splssku$';
+      var imageUrl = 'http://blog-arkency.imgix.net/react-js-google-charts/react-js-logo.png?w=758&h=758&fit=max';
         return <div key={index} className="columns portfolio-item">
            <div className="item-wrap">
                <Link to={"/Portfolio/"+project.url}>

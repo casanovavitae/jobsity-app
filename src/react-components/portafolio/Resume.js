@@ -79,7 +79,6 @@ class Resume extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state);
     return{
         resume: state.api.data.resume
     }

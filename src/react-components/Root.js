@@ -79,7 +79,6 @@ Root.propTypes = {
 };
 
 function mapStateToProps(state) {
-    console.log(state);
     return{
         idToken: state.auth.idToken,
         profile: state.auth.profile,

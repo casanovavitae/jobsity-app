@@ -1,8 +1,9 @@
 import React from 'react'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {retrieveData,putData} from '../../actions/action-api'
+import {retrieveData,putData,addTask,deleteTask} from '../../actions/action-api'
 import Taskitem from './TaskItem'
+import AddTask from './AddTask'
 
 
 class Mongo extends React.Component {
@@ -10,10 +11,20 @@ class Mongo extends React.Component {
         this.props.apiGetData("API_GET_TASKS","https://api.mlab.com/api/1/databases/react-task/collections/tasks?apiKey=Uta31Zvd5IcPbxz1TlvV4aEVCXsLWNHX");
     }
 
-    handleEditState(task, checked){
-        console.log('TASK EDITSTATE',task,checked);
-        let putUrl = 'https://api.mlab.com/api/1/databases/react-task/collections/tasks/'+task._id.$oid+'?apiKey=Uta31Zvd5IcPbxz1TlvV4aEVCXsLWNHX';
-        this.props.apiSetData("API_PUT_TASKS",putUrl,task.text,checked);
+    handleEditState(task,id,checked){
+        let url = 'https://api.mlab.com/api/1/databases/react-task/collections/tasks/'+id.$oid+'?apiKey=Uta31Zvd5IcPbxz1TlvV4aEVCXsLWNHX';
+        this.props.apiSetData("API_GET_TASKS",url,task.text,checked,this.props.task,id.$oid);
+    }
+
+    addTask(text){
+        let url = 'https://api.mlab.com/api/1/databases/react-task/collections/tasks?apiKey=Uta31Zvd5IcPbxz1TlvV4aEVCXsLWNHX';
+        this.props.apiAddTask("API_GET_TASKS",url,text,this.props.task);
+    }
+
+    clearTasks(){
+        let url = 'https://api.mlab.com/api/1/databases/react-task/collections/tasks/';
+        let key = '?apiKey=Uta31Zvd5IcPbxz1TlvV4aEVCXsLWNHX';
+        this.props.apideleteTask("API_GET_TASKS",url,key,this.props.task);
     }
 
     render() {
@@ -21,8 +32,6 @@ class Mongo extends React.Component {
         let singleTask;
         if(this.props.task){
             singleTask = this.props.task.data;
-
-            console.log('Render task',singleTask);
 
             taskItems = singleTask.map(task => {
                 return (
@@ -34,9 +43,11 @@ class Mongo extends React.Component {
         return (
 
         <nav>
+            <AddTask onAddTask={this.addTask.bind(this)} />
             <ul className="nav">
                 {taskItems}
             </ul>
+            <button onClick={this.clearTasks.bind(this)}>Clear Tasks</button>
         </nav>
         )
     }
@@ -49,6 +60,6 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({apiGetData: retrieveData,apiSetData:putData},dispatch)
+    return bindActionCreators({apiGetData: retrieveData,apiSetData:putData, apiAddTask: addTask, apideleteTask: deleteTask},dispatch)
 }
 export default connect(mapStateToProps,matchDispatchToProps)(Mongo)
