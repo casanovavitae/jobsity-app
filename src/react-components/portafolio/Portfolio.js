@@ -4,6 +4,9 @@ import { Redirect, Route, Switch,Router} from 'react-router'
 import { Link,HashRouter } from 'react-router-dom'
 import Counter from '../counter/Counter'
 import Manager from '../manager/Manager'
+import Survey from '../survey/Survey'
+import Calculator from '../calculator/Calculator'
+import Chart from '../chart/Chart'
 
 class Portfolio extends Component {
   render() {
@@ -40,6 +43,9 @@ class Portfolio extends Component {
                  <div>
                      <Route path='/Portfolio/Counter' component={Counter}/>
                      <Route path='/Portfolio/Manager' component={Manager}/>
+                     <Route path='/Portfolio/Survey' component={Survey}/>
+                     <Route path='/Portfolio/Calculator' component={Calculator}/>
+                     <Route path='/Portfolio/Chart' component={Chart}/>
                  </div>
              </HashRouter>
          </div>

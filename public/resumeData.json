@@ -1,6 +1,6 @@
 {
   "main": {
-    "name":"Brad Traversy",
+    "name":"Marco Casanova",
     "occupation":"Web developer, programmer and designer",
     "description":"I design and program websites and web applications of all types. I also teach web dev courses",
     "image":"profilepic.jpg",
@@ -130,48 +130,48 @@
         "modal":"#modal-02"
       },
       {
-        "title":"Judah",
+        "title":"Finder",
         "description":"Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.",
         "category":"Web Development",
         "tags":"Branding, Web Programming",
         "image":"judah.jpg",
-        "url":"Calculator",
+        "url":"",
         "modal":"#modal-03"
       },
       {
-        "title":"Into The Light",
+        "title":"Survey",
         "description":"Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.",
         "category":"Photography",
         "tags":"Photography, Design",
         "image":"into-the-light.jpg",
-        "url":"Text",
+        "url":"Survey",
         "modal":"#modal-04"
       },
       {
-        "title":"Farmer Boy",
+        "title":"Calculator",
         "description":"Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.",
         "category":"Branding",
         "tags":"Branding, Web Design",
         "image":"farmerboy.jpg",
-        "url":"Chart",
+        "url":"Calculator",
         "modal":"#modal-05"
       },
       {
-        "title":"Girl",
+        "title":"Chart",
         "description":"Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.",
         "category":"Photography",
         "tags":"Photography, Graphic Design",
         "image":"girl.jpg",
-        "url":"Mongo",
+        "url":"Chart",
         "modal":"#modal-06"
       },
       {
-        "title":"Origami",
+        "title":"Generator",
         "description":"Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit.",
         "category":"Illustration",
         "tags":"Branding, Illustration",
         "image":"origami.jpg",
-        "url":"Finder",
+        "url":"",
         "modal":"#modal-07"
       },
       {
